@@ -10,14 +10,6 @@
     "OSL-3.0",
     "AFL-3.0"
   ],
-  "authors": [
-    {
-      "name": "Daniel Kozlowski",
-      "email": "daniel.kozlowski@xumulus.com",
-      "homepage": "-",
-      "role": "Developer"
-    }
-  ],
   "autoload": {
     "files": [
       "registration.php"
