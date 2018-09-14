@@ -1218,6 +1218,14 @@ fotoramaVersion = '4.6.4';
     }
 
     function stubEvent($el, eventType) {
+        var isIOS = /ip(ad|hone|od)/i.test(window.navigator.userAgent);
+
+        if (isIOS && eventType === 'touchend') {
+            $el.on('touchend', function(e){
+                $DOCUMENT.trigger('mouseup', e);
+            })
+        }
+
         $el.on(eventType, function (e) {
             stopEvent(e, true);
 
@@ -2369,7 +2377,7 @@ fotoramaVersion = '4.6.4';
                     return;
                 }
 
-                
+
 
                 function waitAndLoad() {
                     var _i = 10;
@@ -2397,10 +2405,10 @@ fotoramaVersion = '4.6.4';
                         }
                     })();
                 }
-                
+
                 frameData.state = '';
                 img.src = src;
-                
+
                 if (frameData.data.caption) {
                     img.alt = frameData.data.caption || "";
                 }
@@ -2496,22 +2504,22 @@ fotoramaVersion = '4.6.4';
                    frame.append(document.getElementById('fast-loder-'+i));
                    var ele = document.getElementById('fast-main-'+i);
                    if(ele){
-                        ele.remove(); 
+                        ele.remove();
                    }
-                   //document.getElementById('fast-main-'+i).remove(); 
+                   //document.getElementById('fast-main-'+i).remove();
                    $navThumbFrame = $navThumbFrame.add($frame);
                     if (dataFrame.video) {
                         frameData.$wrap.append($videoPlay.clone());
                     }
                 }
             });
-            /*var fotoramaEle = 3 
+            /*var fotoramaEle = 3
             for (var i = 1; i < fotoramaEle; i++) {
                //console.log(document.getElementById('fast-loder-'+i));
                addNavFrameEvents(document.getElementById('fast-loder-'+i));
                console.log(document.getElementById('fast-loder-'+i));
             }*/
-            
+
         }
 
         function callFit($img, measuresToFit) {
@@ -3557,7 +3565,7 @@ fotoramaVersion = '4.6.4';
 
                 if ((result.moved || (toggleControlsFLAG && result.pos !== result.newPos && !result.control)) && result.$target[0] !== $fullscreenIcon[0]) {
                     var index = getIndexByPos(result.newPos, measures.w, opts.margin, repositionIndex);
-                    
+
                     that.show({
                         index: index,
                         time: o_fade ? o_transitionDuration : result.time,
